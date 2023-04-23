@@ -1,0 +1,7 @@
+Gotovo sve kolekcije u Javi potiču od java.util.Collection interfejsa.
+Postoje tri tipa kolekcija: ordered lists, maps i sets.
+Ordered list omogućava unos elemenata određenim redosledom i čitanje datih elemenata. Osnovni interfejsi za uređene liste su List i Queue.
+Mape čuvaju reference na objekte sa ključem za pristupanje vrednostima objekta. Osnovni interfejs za mape je Map.
+Set su neuređene kolekcije, po kojima se može iterirati i koje sadrže svaki element samo jednom. Osnovni interfejs za skupove je Set.
+Prilikom deklaracije niza mora se odrediti i njegova dužina.
+Broj elemenata koje sadrži određeni niz ne može se naknadno menjati, tj. ne mogu se dodavati i oduzimati elementi niza.
