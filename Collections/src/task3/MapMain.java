@@ -10,7 +10,7 @@ public class MapMain {
 	 * 	Svaki ključ je povezan sa samo jednom vrednošću. 
 	 * 	Postoje tri implementacione klase i to su: HashMap, 
 	 * 	LinkedHashMap i TreeMap. 
-	 * 	Takođe, Hashtable je u integrisan u JCF implementaciom ovog interfejsa.
+	 * 	Takođe, Hashtable je integrisan u JCF implementaciom ovog interfejsa.
 	 * 	*/
 	
 
