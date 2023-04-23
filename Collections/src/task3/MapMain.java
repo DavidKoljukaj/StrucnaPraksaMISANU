@@ -3,10 +3,8 @@ package task3;
 import java.util.HashMap;
 
 public class MapMain {
-	/*	Mape su jedan od članova Java Collections Framework-a i 
-	 * 	definisane su java.util.Map interfejsom. 
-	 * 	Služe za povezivanje ključeva sa vrednostima. 
-	 * 	Ne mogu sadržati duplikate ključeva. 
+	/*	Mape su jedan od članova Java Collections Framework-a i definisane su java.util.Map interfejsom. 
+	 * 	Služe za povezivanje ključeva sa vrednostima. Ne mogu sadržati duplikate ključeva. 
 	 * 	Svaki ključ je povezan sa samo jednom vrednošću. 
 	 * 	Postoje tri implementacione klase i to su: HashMap, 
 	 * 	LinkedHashMap i TreeMap. 
