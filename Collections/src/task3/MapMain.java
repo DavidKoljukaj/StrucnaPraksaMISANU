@@ -34,17 +34,14 @@ public class MapMain {
 		 * živi, dovoljno je da navedemo naziv objekta tog ključa (ime osobe u ovom primeru).*/
 		System.out.println("Seka Sabljić živi u "+korisniciGradovi.get("Seka Sabljić")+"u.");
 		
-		/*Kao što je gore navedeno, ne mogu postojati duplikati ključeva
-		 *(u ovom slučaju imena korisnika). Vrednost korisnika
-		 *sa ključem "Pera Perić" nakon upotrebe metode put() za
-		 *isti ključ postaje "Niš". */
+		/*Kao što je gore navedeno, ne mogu postojati duplikati ključeva. Vrednost korisnika
+		 *sa ključem "Pera Perić" nakon upotrebe metode put() za isti ključ postaje "Niš". */
 		System.out.println("Pera Perić živi u "+korisniciGradovi.get("Pera Perić")+"u.");
 		/*Da bismo dobili sve vrednosti koje se nalaze u parametru V možemo koristiti
 		 * .values() metod.*/
 		System.out.println("Vrednosti povezane sa svim ključevima: " + korisniciGradovi.values());
 		
-		/*Možemo utvrditi da li određeni ključ postoji u mapi korišćenjem
-		 *metode containsKey() */
+		/*Možemo utvrditi da li određeni ključ postoji u mapi korišćenjem metode containsKey() */
 		boolean postoji = korisniciGradovi.containsKey("Mika Mikić");
 		if(postoji)
 			System.out.println("Traženi ključ se nalazi u mapi.");
