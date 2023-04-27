@@ -1,10 +1,11 @@
 package praksa;
 
 
+
 import java.util.ArrayList;
-import java.util.HashMap;
+
 import java.util.List;
-import java.util.Map;
+
 
 
 public class LikoviMain {
@@ -42,14 +43,21 @@ public class LikoviMain {
 		System.out.println(got.daenerys.get(0) + "\t" + counterDany);
 		System.out.println(got.jon.get(0) + "\t\t" + counterJon);
 		System.out.println(got.tyrion.get(0) + "\t" + counterTyrion);
-		System.out.println(got.cersei.get(0) + "\t" + counterCersei);
+		System.out.println(got.cersei.get(0) + "\t" + counterCersei+"\n");
 
-		System.out.println("\n"+Likovi.characterMood(got.daenerys.get(0),porukeDany));
-		System.out.println(Likovi.characterMood(got.jon.get(0),porukeJon));
-		System.out.println(Likovi.characterMood(got.tyrion.get(0),porukeTyrion));
-		System.out.println(Likovi.characterMood(got.cersei.get(0),porukeCersei));
+		 ArrayList<String> danyMood = Likovi.characterMood(got.daenerys.get(0),porukeDany);
+		 ArrayList<String> jonMood = Likovi.characterMood(got.jon.get(0),porukeJon);
+		 ArrayList<String> tyrionMood = Likovi.characterMood(got.tyrion.get(0),porukeTyrion);
+		 ArrayList<String> cerseiMood = Likovi.characterMood(got.cersei.get(0),porukeCersei);
+		 
+		 System.out.println(danyMood.get(0));
+		 System.out.println(jonMood.get(0));
+		 System.out.println(tyrionMood.get(0));
+		 System.out.println(cerseiMood.get(0)+"\n");
+		 
+		 System.out.println(Likovi.disposition()+"\n");
 		
-		
+		 System.out.println(Likovi.moreInLove(got.daenerys.get(0),got.jon.get(0),porukeDany,porukeJon));
 
 	}
 }

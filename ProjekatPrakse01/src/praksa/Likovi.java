@@ -1,6 +1,8 @@
 package praksa;
 
 import java.util.ArrayList;
+
+
 import java.util.Arrays;
 import java.util.List;
 import java.util.regex.Matcher;
@@ -62,25 +64,103 @@ public class Likovi {
 		return sb.toString();
 	}
 	
-	public static String characterMood(String name,List<String> msgs) {
+	public static ArrayList<String> characterMood(String name, List<String> msgs) {
+		ArrayList<String> happyOrSad = new ArrayList<>();
 		int happy = 0;
 		int sad = 0;
+		String raspolozenje = new String();
 		for (String poruke : msgs) {
 			if (poruke.matches(("(.*)🙂(.*)")) || poruke.matches("(.*)😍(.*)") || poruke.matches("(.*)😄(.*)")) {
 				happy++;
-			} else if (poruke.matches("(.*)😢(.*)") || poruke.matches("(.*)😭(.*)") || poruke.matches("(.*)🤬(.*)")||poruke.matches("(.*)👿(.*)")) {
+			} else if (poruke.matches("(.*)😢(.*)") || poruke.matches("(.*)😭(.*)") || poruke.matches("(.*)🤬(.*)")
+					|| poruke.matches("(.*)👿(.*)")) {
 				sad++;
 			}
 		}
 		int dispozicija = happy - sad;
-		if (dispozicija > 0)
-			return name +" je uglavnom dobre volje." ;
-		if (dispozicija == 0)
-			return name +" ume da bude i dobre i loše volje.";
-		if (dispozicija < 0)
-			return name +" je uglavnom loše volje.";
-		else
-			return "";
+		if (dispozicija > 0) {
+			raspolozenje = name + " je uglavnom dobre volje.";
+			happyOrSad.add(raspolozenje);
+			happyOrSad.add(""+dispozicija);
+			
+		}
+		if (dispozicija == 0) {
+			raspolozenje = name + " ume da bude i dobre i loše volje.";
+			happyOrSad.add(raspolozenje);
+			happyOrSad.add(""+dispozicija);
+		}
+		if (dispozicija < 0) {
+			raspolozenje = name + " je uglavnom loše volje.";
+			happyOrSad.add(raspolozenje);
+			happyOrSad.add(""+dispozicija);
+		}
+		return happyOrSad;
+
+	}
+	
+	public static String disposition() {
+		String s = FileHelper.loadMetaData();
+		Likovi got = new Likovi(s);
+		List<String> porukeDany = readMsgs(got.daenerys.get(2));
+		List<String> porukeJon = readMsgs(got.jon.get(2));
+		List<String> porukeTyrion = readMsgs(got.tyrion.get(2));
+		List<String> porukeCersei = readMsgs(got.cersei.get(2));
 		
+		ArrayList<String> danyMood = characterMood(got.daenerys.get(0),porukeDany);
+		ArrayList<String> jonMood = characterMood(got.jon.get(0),porukeJon);
+		ArrayList<String> tyrionMood = characterMood(got.tyrion.get(0),porukeTyrion);
+		ArrayList<String> cerseiMood = characterMood(got.cersei.get(0),porukeCersei);
+		
+		int d = Integer.parseInt(danyMood.get(1));
+		int j = Integer.parseInt(jonMood.get(1));
+		int t = Integer.parseInt(tyrionMood.get(1));
+		int c = Integer.parseInt(cerseiMood.get(1));
+		
+		int[] mood = new int[4];
+		mood[0]=d;
+		mood[1]=j;
+		mood[2]=t;
+		mood[3]=c;
+		
+		Arrays.sort(mood);
+		
+		StringBuilder sb = new StringBuilder();
+		if(mood[0]==d)
+			sb.append(got.daenerys.get(0)+" je najtužnija,");
+		else if(mood[0]==j)
+			sb.append(got.jon.get(0)+" je najtužniji,");
+		else if(mood[0]==t)
+			sb.append(got.tyrion.get(0)+" je najtužniji,");
+		else if(mood[0]==c)
+			sb.append(got.cersei.get(0)+" je najtužnija,");
+		
+		if(mood[3]==d)
+			sb.append(" a "+got.daenerys.get(0)+" je najsrećnija.");
+		else if(mood[3]==j)
+			sb.append(" a "+got.jon.get(0)+" je najsrećniji.");
+		else if(mood[3]==t)
+			sb.append(" a "+got.tyrion.get(0)+" je najsrećniji.");
+		else if(mood[3]==c)
+			sb.append(" a "+got.cersei.get(0)+" je najsrećnija.");
+		
+		return sb.toString();
+		
+	}
+	
+	public static int inLove(List<String> msgs) {
+		int counter = 0;
+		for(String poruka : msgs) {
+			if(poruka.matches(("(.*)😘(.*)"))||poruka.matches("(.*)😍(.*)")){
+				counter++;
+			}
+		}
+		return counter;
+	}
+	
+	public static String moreInLove(String nameFirst,String nameSecond,List<String> msgsFirst, List<String> msgsSecond) {
+		if(inLove(msgsFirst)>inLove(msgsSecond))
+			return nameFirst+" više voli " + nameSecond+"-a nego on nju.";
+		else
+			return nameSecond+" više voli " +nameFirst+" nego ona njega.";
 	}
 }
