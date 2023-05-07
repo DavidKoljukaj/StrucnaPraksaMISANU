@@ -1,0 +1,206 @@
+CREATE DATABASE bazabib
+
+CREATE TABLE biblioteke(
+    bibliotekaID INT PRIMARY KEY,
+    naziv varchar(25) NOT null,
+    ulica varchar(45) NOT null,
+    broj varchar(15) NOT null,
+    grad varchar(25) NOT null,
+    telefon varchar(25) NOT null
+    )ENGINE=INNODB;
+
+CREATE TABLE bibliotekari(
+    sifraZaposlenog int PRIMARY KEY,
+    ime varchar(25) NOT null,
+    prezime varchar(25) NOT null,
+    ulica varchar(45) NOT null,
+    broj varchar(15) NOT null,
+    grad varchar(25) NOT null,
+    JMBG bigint NOT null,
+    telefon varchar(25),
+    bibliotekaID int,
+    
+    FOREIGN KEY(bibliotekaID)
+    REFERENCES biblioteke(bibliotekaID)
+    ON UPDATE CASCADE
+    ON DELETE NO ACTION
+    )ENGINE=INNODB;
+
+CREATE TABLE clanovi(
+    clanskaKarta int PRIMARY KEY,
+    ime varchar(25) NOT null,
+    prezime varchar(25) NOT null,
+    datumRodjenja date NOT null,
+    telefon varchar(25),
+    ulica varchar(45) NOT null,
+    broj varchar(15) NOT null,
+    grad varchar(25) NOT null,
+    bibliotekaID int,
+    
+    FOREIGN KEY(bibliotekaID)
+    REFERENCES biblioteke(bibliotekaID)
+    ON UPDATE CASCADE
+    ON DELETE NO ACTION
+    )ENGINE=INNODB;
+
+CREATE TABLE knjige(
+    ISBN bigint PRIMARY KEY,
+    naziv varchar(45) NOT null,
+    jezik varchar(25) NOT null,
+    izdavac varchar(25) NOT null,
+    bibliotekaID int,
+    
+    FOREIGN KEY(bibliotekaID)
+    REFERENCES biblioteke(bibliotekaID)
+    ON UPDATE CASCADE
+    ON DELETE NO ACTION
+    )ENGINE=INNODB;
+
+CREATE TABLE autori(
+    autoriD int PRIMARY KEY,
+    ime varchar(25) NOT null,
+    prezime varchar(25) NOT null,
+    ISBN bigint,
+    
+    FOREIGN KEY(ISBN)
+    REFERENCES knjige(ISBN)
+    ON UPDATE CASCADE
+    ON DELETE NO ACTION
+    )ENGINE=INNODB;
+
+CREATE TABLE decije(
+    decijaID bigint PRIMARY KEY,
+    uzrast varchar(45),
+    
+    FOREIGN KEY(decijaID)
+    REFERENCES knjige(ISBN)
+    ON UPDATE CASCADE
+    ON DELETE NO ACTION
+    )ENGINE=INNODB;
+
+CREATE TABLE pozajmne(
+    pozajmnaID bigint PRIMARY KEY,
+    aktuelnost ENUM('Da','Ne') NOT null,
+    zanr varchar(25) NOT null,
+    
+    FOREIGN KEY(pozajmnaID)
+    REFERENCES knjige(ISBN)
+    ON UPDATE CASCADE
+    ON DELETE NO ACTION
+    )ENGINE=INNODB;
+
+CREATE TABLE naucne(
+    naucnaID bigINT PRIMARY KEY,
+    oblast varchar(45) NOT null,
+    
+    FOREIGN KEY(naucnaID)
+    REFERENCES knjige(ISBN)
+    ON UPDATE CASCADE
+    ON DELETE NO ACTION
+    )ENGINE=INNODB;
+
+CREATE TABLE evidencije(
+    evidencijaID INT PRIMARY KEY AUTO_INCREMENT,
+    datumIzdavanja date NOT null,
+    datumVracanja date,
+    sifraZaposlenog int,
+    clanskaKarta int,
+    ISBN bigint,
+    
+    FOREIGN KEY(sifraZaposlenog)
+    REFERENCES bibliotekari(sifraZaposlenog)
+    ON UPDATE CASCADE
+    ON DELETE NO ACTION,
+    
+    FOREIGN KEY(clanskaKarta)
+    REFERENCES clanovi(clanskaKarta)
+    ON UPDATE CASCADE
+    ON DELETE NO ACTION,
+    
+    FOREIGN KEY(ISBN)
+    REFERENCES knjige(ISBN)
+    ON UPDATE CASCADE
+    ON DELETE NO ACTION
+    )ENGINE=INNODB;
+
+INSERT INTO `biblioteke`(`bibliotekaID`, `naziv`, `ulica`, `broj`, `grad`, `telefon`) VALUES 
+(1,'Narodna biblioteka Srbije','Skerliceva',1,'Beograd','+381 11 2451 242'),
+(2,'NB \"Stevan Sremac\"','Borivoja Gojkovica',9,'Nis','018/511-403')
+
+INSERT INTO `bibliotekari`(`sifraZaposlenog`, `ime`, `prezime`, `ulica`, `broj`, `grad`, `JMBG`, `bibliotekaID`) VALUES 
+(687223,'Petar','Vranic','Elektronskih brigada',88,'Beograd',2505983988654,1),
+(690018,'Andrija','Djurisic','Katodnih aleja',107,'Nis',1308986752338,2)
+
+INSERT INTO `clanovi`(`clanskaKarta`, `ime`, `prezime`, `datumRodjenja`, `telefon`, `ulica`, `broj`, `grad`, `bibliotekaID`) VALUES 
+(156,'Jovan','Juric','1988-12-25','3556988','Mose Pijade',17,'Beograd',1),
+(231,'Mirko','Maric','1995-02-05','6587895','Kornelija Stankovica',30,'Nis',2)
+
+INSERT INTO `knjige`(`ISBN`, `naziv`, `jezik`, `izdavac`, `bibliotekaID`) VALUES 
+(9788652145898,'Odakle sam bila vise nisam','Srpski','Laguna',1),
+(9788663030428,'Atomske navike','Srpski','Finesa',2),
+(978868119615,'Mausart','Srpski','Lokomotiva',1),
+(9781408856772,'Harry Potter','Engleski','Bloomsbury',2),
+(9788662632951,'The Life and the Inventions of a Genius','Engleski','Akademska knjiga',2),
+(9788610028157,'Kratki odgovori na velika pitanja','Srpski','Vulkan',1)
+
+INSERT INTO `autori`(`autoriD`, `ime`, `prezime`, `ISBN`) VALUES 
+(1,'Dejan','Tijago-Stankovic',9788652145898),
+(2,'Dzejms','Klir',9788663030428),
+(3,'Tjeri','Zor',978868119615),
+(4,'J.K.','Rowling',9781408856772),
+(5,'Aleksandar','Marinicic',9788662632951),
+(6,'Stiven','Hoking',9788610028157)
+
+INSERT INTO `decije`(`decijaID`, `uzrast`) VALUES 
+(978868119615,'Dvanaest godina'),(9781408856772,'9 godina')
+
+INSERT INTO `pozajmne`(`pozajmnaID`, `aktuelnost`, `zanr`) VALUES 
+(9788652145898,'Da','Drama'),(9788663030428,'Da','Popularna psihologija')
+
+INSERT INTO `naucne`(`naucnaID`, `oblast`) VALUES 
+(9788662632951,'Biografija'),(9788610028157,'Fizika')
+
+INSERT INTO `evidencije`(`datumIzdavanja`,  `sifraZaposlenog`, `clanskaKarta`, `ISBN`) VALUES 
+('2023-05-01',687223,156,9781408856772),
+('2023-04-25',690018,231,9788610028157)
+
+ALTER TABLE knjige
+ADD COLUMN stanje int NOT null;
+
+UPDATE `knjige` SET `stanje`=5 
+WHERE knjige.ISBN=9788652145898
+
+CREATE TABLE knjige_log(
+    klogID int PRIMARY KEY AUTO_INCREMENT,
+    naziv varchar(45) null,
+    ISBN bigint null,
+    old_stanje int null,
+    new_stanje INT null,
+    date_created datetime null DEFAULT null
+    )ENGINE=INNODB;
+
+DELIMITER //
+CREATE TRIGGER before_update_stanje BEFORE UPDATE ON knjige
+FOR EACH ROW
+BEGIN
+IF new.stanje <1 THEN
+SET new.stanje=0;
+INSERT INTO knjige_log(naziv,ISBN,old_stanje,new_stanje,date_created)
+VALUES(old.naziv,old.ISBN,old.stanje,new.stanje,now());
+ELSE
+INSERT INTO knjige_log(naziv,ISBN,old_stanje,new_stanje,date_created)
+VALUES(old.naziv,old.ISBN,old.stanje,new.stanje,now());
+END if;
+end //
+DELIMITER ;
+
+UPDATE knjige
+SET stanje = 3
+WHERE knjige.ISBN=9788652145898
+
+#nakon unosa nove knjige putem JDBC-a
+INSERT INTO `autori`(`autoriD`, `ime`, `prezime`, `ISBN`) VALUES 
+(8,'Aleksandar','Janjić',9789811976766),
+(9,' Jelena','D. Velimirović',9789811976766)
+
+INSERT INTO `naucne`(`naucnaID`, `oblast`) VALUES (9789811976766,'Elektrotehnika')

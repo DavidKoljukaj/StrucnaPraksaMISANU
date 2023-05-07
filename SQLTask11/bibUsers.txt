@@ -1,0 +1,21 @@
+CREATE USER 'adminBib'@'localhost' identified by 'adminPassword';
+GRANT ALL PRIVILEGES ON bazabib.* to 'adminBib'@'localhost';
+
+CREATE USER 'librarianOne'@'localhost' identified by 'libOnePass';
+GRANT SELECT, INSERT, UPDATE ON bazabib.knjige to 'librarianOne'@'localhost';
+GRANT SELECT, INSERT, UPDATE ON bazabib.autori to 'librarianOne'@'localhost';
+GRANT SELECT, INSERT, UPDATE ON bazabib.decije to 'librarianOne'@'localhost';
+GRANT SELECT, INSERT, UPDATE ON bazabib.pozajmne to 'librarianOne'@'localhost';
+GRANT SELECT, INSERT, UPDATE ON bazabib.naucne to 'librarianOne'@'localhost';
+GRANT SELECT, INSERT, UPDATE ON bazabib.knjige_log to 'librarianOne'@'localhost';
+GRANT SELECT, INSERT, UPDATE ON bazabib.clanovi to 'librarianOne'@'localhost';
+
+CREATE USER 'memberOne'@'localhost' identified by 'memberOnePassword';
+
+GRANT SELECT ON bazabib.knjige to 'memberOne'@'localhost';
+GRANT SELECT ON bazabib.decije to 'memberOne'@'localhost';
+GRANT SELECT ON bazabib.naucne to 'memberOne'@'localhost';
+GRANT SELECT ON bazabib.pozajmne to 'memberOne'@'localhost';
+GRANT SELECT ON bazabib.autori to 'memberOne'@'localhost';
+
+
