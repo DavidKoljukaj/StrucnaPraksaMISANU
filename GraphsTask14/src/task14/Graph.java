@@ -12,7 +12,7 @@ public class Graph {
 	 *I Najvažniji posebni graf je tree. Tree je aciklični undirected graf. To je povezani graf sa N nodova i N-1 ivica.
 	 *II Rooted graf je tree graf sa root nodom prema kojem, ili od koga, sve ivice pokazuju.
 	 *Kada ivice pokazuju od root-a, takav graf se naziva out-tree(arborescence), a kada pokazuju ka root-u, in-tree(anti-arborescence).
-	 *III Directed Acyclic Graphs(DAGs) su aciklični directed grafovi. Svi out-tree grafovi su DAGs, ali svi DAG-ovi nisu out-tree!
+	 *III Directed Acyclic Graphs(DAGs) su, kao što im ime kaže, aciklični directed grafovi. Svi out-tree grafovi su DAGs, ali svi DAG-ovi nisu out-tree!
 	 *IV Bipartite graf je onaj čiji se nodovi mogu podeliti u dve nezavisne grupe U,V tako da svaka ivica povezuje U i V.
 	 *V Kompletni graf - onaj u kome postoji jedinstvena ivica između svakog para nodova. Kompletni graf sa n nodova se obeležava kao graf kn. */
 	
