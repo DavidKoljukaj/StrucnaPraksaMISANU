@@ -9,10 +9,10 @@ public class Graph {
 	 *-directed graph ili digraph: ivice imaju orijentaciju. edge(U,V) je ivica od noda U(ili vertex-a U) do noda V; U-->V
 	 *-weighted graph: težina predstavlja neku vrednost(npr. razdaljinu) (U,V,W). I undirected i directed grafovi mogu imati težinu.
 	 *-special graphs:
-	 *I Najvažniji posebni graf je tree. Tree je undirected graph with no cycles. To je povezani graf sa N nodova i N-1 ivica.
+	 *I Najvažniji posebni graf je tree. Tree je aciklični undirected graf. To je povezani graf sa N nodova i N-1 ivica.
 	 *II Rooted graf je tree graf sa root nodom prema kojem, ili od koga, sve ivice pokazuju.
 	 *Kada ivice pokazuju od root-a, takav graf se naziva out-tree(arborescence), a kada pokazuju ka root-u, in-tree(anti-arborescence).
-	 *III Directed Acyclic Graphs(DAGs) su directed grafovi with no cycles. Svi out-tree grafovi su DAGs, ali svi DAG-ovi nisu out-tree!
+	 *III Directed Acyclic Graphs(DAGs) su aciklični directed grafovi. Svi out-tree grafovi su DAGs, ali svi DAG-ovi nisu out-tree!
 	 *IV Bipartite graf je onaj čiji se nodovi mogu podeliti u dve nezavisne grupe U,V tako da svaka ivica povezuje U i V.
 	 *V Kompletni graf - onaj u kome postoji jedinstvena ivica između svakog para nodova. Kompletni graf sa n nodova se obeležava kao graf kn. */
 	
